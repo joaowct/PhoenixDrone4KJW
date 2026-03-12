@@ -27,8 +27,11 @@ jobs:
     - name: Permission
       run: chmod +x ./gradlew
 
-    - name: Build
-      run: ./gradlew assembleDebug
+    - name: Build APK
+  run: |
+    ls
+    chmod +x gradlew
+    ./gradlew assembleDebug
 
     - name: Upload
       uses: actions/upload-artifact@v4
