@@ -8,23 +8,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
 
-    - name: Set up JDK
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Show files
+      run: ls -R
+
+    - name: Setup Java
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        distribution: temurin
+        java-version: 17
 
-    - name: Grant permission
-      run: chmod +x gradlew
+    - name: Setup Android
+      uses: android-actions/setup-android@v3
 
-    - name: Build APK
+    - name: Permission
+      run: chmod +x ./gradlew
+
+    - name: Build
       run: ./gradlew assembleDebug
 
-    - name: Upload APK
+    - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: phoenix-apk
+        name: apk
         path: app/build/outputs/apk/debug/*.apk
